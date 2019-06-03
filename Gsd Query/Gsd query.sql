@@ -1,0 +1,42 @@
+CREATE DATABASE `gsd` /*!40100 DEFAULT CHARACTER SET latin1 */;
+CREATE TABLE `admin` (
+  `a_id` int(11) NOT NULL,
+  `a_f_name` varchar(50) NOT NULL,
+  `a_l_name` varchar(50) NOT NULL,
+  `a_age` int(2) NOT NULL,
+  `a_gender` varchar(45) NOT NULL,
+  `a_number` int(20) NOT NULL,
+  `a_password` varchar(45) NOT NULL,
+  PRIMARY KEY (`a_id`),
+  UNIQUE KEY `a_number_UNIQUE` (`a_number`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `employee` (
+  `e_id` int(11) NOT NULL,
+  `e_f_name` varchar(45) NOT NULL,
+  `e_l_name` varchar(45) NOT NULL,
+  `e_age` int(2) NOT NULL,
+  `e_gender` varchar(45) NOT NULL,
+  `e_number` int(100) NOT NULL,
+  `e_address` varchar(45) NOT NULL,
+  `e_city` varchar(45) NOT NULL,
+  `e_zipcode` varchar(45) NOT NULL,
+  `e_password` varchar(45) NOT NULL,
+  PRIMARY KEY (`e_id`),
+  UNIQUE KEY `e_number_UNIQUE` (`e_number`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `gsd` (
+  `g_id` int(11) NOT NULL AUTO_INCREMENT,
+  `g_name` varchar(45) NOT NULL,
+  PRIMARY KEY (`g_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=106 DEFAULT CHARSET=latin1;
+CREATE TABLE `track` (
+  `t_id` int(11) NOT NULL AUTO_INCREMENT,
+  `t_e_fk` int(11) NOT NULL,
+  `t_g_fk` int(11) NOT NULL,
+  `t_status` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`t_id`),
+  KEY `t_e_fk_idx` (`t_e_fk`),
+  KEY `t_g_fk_idx` (`t_g_fk`),
+  CONSTRAINT `t_e_fk` FOREIGN KEY (`t_e_fk`) REFERENCES `employee` (`e_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `t_g_fk` FOREIGN KEY (`t_g_fk`) REFERENCES `gsd` (`g_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;

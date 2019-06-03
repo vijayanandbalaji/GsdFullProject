@@ -1,0 +1,77 @@
+CREATE SCHEMA `gsd` ;
+
+
+CREATE TABLE `gsd`.`admin` (
+  `a_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `a_f_name` VARCHAR(50) NOT NULL,
+  `a_l_name` VARCHAR(50) NOT NULL,
+  `a_age` INT(2) NOT NULL,
+  `a_gender` VARCHAR(45) NOT NULL,
+  `a_number` VARCHAR(10) NOT NULL,
+  `a_password` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`a_id`),
+  UNIQUE INDEX `a_number_UNIQUE` (`a_number` ASC));
+
+CREATE TABLE `gsd`.`employee` (
+  `e_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `e_f_name` VARCHAR(45) NOT NULL,
+  `e_l_name` VARCHAR(45) NOT NULL,
+  `e_age` INT(2) NOT NULL,
+  `e_gender` VARCHAR(45) NOT NULL,
+  `e_number` INT(10) NOT NULL,
+  `e_address` VARCHAR(45) NOT NULL,
+  `e_city` VARCHAR(45) NOT NULL,
+  `e_zipcode` VARCHAR(45) NOT NULL,
+  `e_password` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`e_id`),
+  UNIQUE INDEX `e_number_UNIQUE` (`e_number` ASC));
+
+
+CREATE TABLE `gsd`.`gsd` (
+  `g_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `g_name` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`g_id`));
+
+
+
+
+CREATE TABLE `gsd`.`track` (
+  `t_id` INT(11) NOT NULL,
+  `t_e_fk` INT(11) NOT NULL,
+  `t_g_fk` INT(11) NOT NULL,
+  PRIMARY KEY (`t_id`),
+  INDEX `t_e_fk_idx` (`t_e_fk` ASC),
+  INDEX `t_g_fk_idx` (`t_g_fk` ASC),
+  CONSTRAINT `t_e_fk`
+    FOREIGN KEY (`t_e_fk`)
+    REFERENCES `gsd`.`employee` (`e_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `t_g_fk`
+    FOREIGN KEY (`t_g_fk`)
+    REFERENCES `gsd`.`gsd` (`g_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+
+
+
+
+
+
+
+INSERT INTO `gsd`.`gsd` (`g_id`, `g_name`) VALUES ('101', 'Desktop Problem');
+INSERT INTO `gsd`.`gsd` (`g_id`, `g_name`) VALUES ('102', 'Software Not Installed');
+INSERT INTO `gsd`.`gsd` (`g_id`, `g_name`) VALUES ('103', 'Tru Time issue');
+INSERT INTO `gsd`.`gsd` (`g_id`, `g_name`) VALUES ('104', 'Workbench Not installed');
+
+
+
+
+
+
+
+
+
+
+
